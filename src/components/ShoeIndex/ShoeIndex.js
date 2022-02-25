@@ -1,17 +1,25 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React from "react";
+import styled from "styled-components/macro";
 
-import { WEIGHTS } from '../../constants';
+import { WEIGHTS } from "../../constants";
 
-import Breadcrumbs from '../Breadcrumbs';
-import Select from '../Select';
-import Spacer from '../Spacer';
-import ShoeSidebar from '../ShoeSidebar';
-import ShoeGrid from '../ShoeGrid';
+import Breadcrumbs from "../Breadcrumbs";
+import Select from "../Select";
+import Spacer from "../Spacer";
+import ShoeSidebar from "../ShoeSidebar";
+import ShoeGrid from "../ShoeGrid";
 
 const ShoeIndex = ({ sortId, setSortId }) => {
   return (
     <Wrapper>
+      <LeftColumn>
+        <Breadcrumbs>
+          <Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
+          <Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
+          <Breadcrumbs.Crumb href="/sale/shoes">Shoes</Breadcrumbs.Crumb>
+        </Breadcrumbs>
+        <ShoeSidebar />
+      </LeftColumn>
       <MainColumn>
         <Header>
           <Title>Running</Title>
@@ -27,30 +35,30 @@ const ShoeIndex = ({ sortId, setSortId }) => {
         <Spacer size={32} />
         <ShoeGrid />
       </MainColumn>
-      <LeftColumn>
-        <Breadcrumbs>
-          <Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
-          <Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
-          <Breadcrumbs.Crumb href="/sale/shoes">
-            Shoes
-          </Breadcrumbs.Crumb>
-        </Breadcrumbs>
-        <Spacer size={42} />
-        <ShoeSidebar />
-      </LeftColumn>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   align-items: baseline;
   gap: 32px;
+  @media ${({ theme }) => theme.QUERIES.tabletAndSmaller} {
+    flex-direction: column;
+    gap: 0px;
+  }
 `;
 
 const LeftColumn = styled.div`
   flex-basis: 248px;
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+  @media ${({ theme }) => theme.QUERIES.tabletAndSmaller} {
+    flex-basis: 0px;
+    gap: 0;
+  }
 `;
 
 const MainColumn = styled.div`
@@ -61,6 +69,11 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  @media ${({ theme }) => theme.QUERIES.phoneAndSmaller} {
+    & *:last-child {
+      display: none;
+    }
+  }
 `;
 
 const Title = styled.h2`
