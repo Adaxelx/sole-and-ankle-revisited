@@ -5,10 +5,12 @@ import Header from "../Header";
 import ShoeIndex from "../ShoeIndex";
 
 const BREAKPOINTS = {
+  phoneMin: 600 / 16,
   tabletMin: 950 / 16,
   laptopMin: 1300 / 16,
 };
 const QUERIES = {
+  phoneAndSmaller: `(max-width: ${BREAKPOINTS.phoneMin}rem)`,
   tabletAndSmaller: `(max-width: ${BREAKPOINTS.tabletMin}rem)`,
   laptopAndSmaller: `(max-width: ${BREAKPOINTS.laptopMin}rem)`,
 };

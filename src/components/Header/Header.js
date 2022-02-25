@@ -59,12 +59,12 @@ const Header = () => {
 };
 
 const MobileButtonsWrapper = styled.div`
-  display: flex;
-  gap: 24px;
-  margin-left: auto;
+  display: none;
 
-  @media ${({ theme }) => theme.QUERIES.laptopAndUp} {
-    display: none;
+  @media ${({ theme }) => theme.QUERIES.tabletAndSmaller} {
+    display: flex;
+    gap: 24px;
+    margin-left: auto;
   }
 `;
 
@@ -72,42 +72,39 @@ const TransparentButton = styled(UnstyledButton)`
   ${MobileButtonsWrapper} &:first-child {
     margin-left: 24px;
   }
-
-  @media ${({ theme }) => theme.QUERIES.laptopAndUp} {
-    display: none;
-  }
 `;
 
 const MainHeader = styled.div`
   display: flex;
-  align-items: center;
-  padding: 18px 16px;
+  align-items: baseline;
+  padding: 18px 32px;
   height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
 
-  @media ${({ theme }) => theme.QUERIES.laptopAndSmaller} {
-    align-items: baseline;
+  @media ${({ theme }) => theme.QUERIES.tabletAndSmaller} {
+    align-items: center;
+    border-top: 4px solid ${COLORS.gray[900]};
   }
 
-  @media ${({ theme }) => theme.QUERIES.tabletAndSmaller} {
-    padding: 18px 32px;
-    border-top: 4px solid ${COLORS.gray[900]};
+  @media ${({ theme }) => theme.QUERIES.phoneAndSmaller} {
+    padding: 18px 16px;
   }
 `;
 
 const Nav = styled.nav`
-  display: none;
+  display: flex;
+  gap: 48px;
+  margin: 0px 48px;
 
-  @media ${({ theme }) => theme.QUERIES.laptopAndUp} {
-    display: flex;
-    gap: 48px;
-    margin: 0px 48px;
+  @media ${({ theme }) => theme.QUERIES.tabletAndSmaller} {
+    display: none;
   }
 `;
 
 const Side = styled.div`
-  @media ${({ theme }) => theme.QUERIES.laptopAndUp} {
-    flex: 1;
+  flex: 1;
+  @media ${({ theme }) => theme.QUERIES.tabletAndSmaller} {
+    flex: 0;
   }
 `;
 
