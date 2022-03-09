@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import styled from "styled-components/macro";
+import styled, { keyframes } from "styled-components/macro";
 import { DialogOverlay, DialogContent } from "@reach/dialog";
 
 import { COLORS, QUERIES } from "../../constants";
@@ -18,7 +18,7 @@ const MobileMenu = ({ isOpen, onDismiss }) => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper isOpen={isOpen} onDismiss={onDismiss}>
       <Content>
         <CloseButton onClick={onDismiss}>
           <IconWrapper>
@@ -49,6 +49,24 @@ const MobileMenu = ({ isOpen, onDismiss }) => {
 
 export default MobileMenu;
 
+const fadeIn = keyframes`
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+`;
+
+const slideIn = keyframes`
+  from{
+    transform: translateX(100%);
+  }
+  to{
+    transform: translateX(0%);
+  }
+`;
+
 const Side = styled.div`
   flex-grow: 1;
 `;
@@ -57,6 +75,9 @@ const Nav = styled.nav`
   display: flex;
   flex-direction: column;
   gap: 22px;
+
+  animation: ${fadeIn} calc(var(--animation-time) * 2) both;
+  animation-delay: var(--text-animation-delay);
 `;
 
 const Footer = styled.footer`
@@ -65,6 +86,8 @@ const Footer = styled.footer`
   justify-content: flex-end;
   gap: 14px;
   height: 100%;
+  animation: ${fadeIn} var(--animation-time) both;
+  animation-delay: var(--text-animation-delay);
 `;
 
 const FooterLink = styled.a`
@@ -95,6 +118,10 @@ const Wrapper = styled(DialogOverlay)`
   display: flex;
   justify-content: end;
   background: rgba(96, 100, 108, 0.8);
+  --animation-time: 250ms;
+  --text-animation-delay: calc(var(--animation-time) * 1.5);
+
+  animation: ${fadeIn} var(--animation-time);
 `;
 
 const Content = styled(DialogContent)`
@@ -105,4 +132,7 @@ const Content = styled(DialogContent)`
   background-color: ${COLORS.white};
   padding: 32px;
   min-width: min(300px, 100%);
+
+  animation: ${slideIn} var(--animation-time) both ease-out;
+  animation-delay: var(--animation-time);
 `;

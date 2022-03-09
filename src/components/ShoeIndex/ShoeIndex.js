@@ -23,14 +23,16 @@ const ShoeIndex = ({ sortId, setSortId }) => {
       <MainColumn>
         <Header>
           <Title>Running</Title>
-          <Select
-            label="Sort"
-            value={sortId}
-            onChange={(ev) => setSortId(ev.target.value)}
-          >
-            <option value="newest">Newest Releases</option>
-            <option value="price">Price</option>
-          </Select>
+          <SortWrapper>
+            <Select
+              label="Sort"
+              value={sortId}
+              onChange={(ev) => setSortId(ev.target.value)}
+            >
+              <option value="newest">Newest Releases</option>
+              <option value="price">Price</option>
+            </Select>
+          </SortWrapper>
         </Header>
         <Spacer size={32} />
         <ShoeGrid />
@@ -69,10 +71,11 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+`;
+
+const SortWrapper = styled.div`
   @media ${({ theme }) => theme.QUERIES.phoneAndSmaller} {
-    & *:last-child {
-      display: none;
-    }
+    display: none;
   }
 `;
 

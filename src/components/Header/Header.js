@@ -10,6 +10,73 @@ import MobileMenu from "../MobileMenu";
 import IconWrapper from "../IconWrapper";
 import VisuallyHidden from "../VisuallyHidden";
 import UnstyledButton from "../UnstyledButton";
+
+const AnimatedNavLink = ({ children, ...delegated }) => {
+  return (
+    <NavLink {...delegated}>
+      <MainText>{children}</MainText>
+      <AnimationText>{children}</AnimationText>
+    </NavLink>
+  );
+};
+
+export const NavLink = styled.a`
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: ${COLORS.gray[900]};
+  font-weight: ${WEIGHTS.medium};
+
+  &:first-of-type {
+    color: ${COLORS.secondary};
+  }
+
+  overflow: hidden;
+  position: relative;
+
+  --transition-start: 150ms;
+  --transition-end: 250ms;
+`;
+
+const MainText = styled.span`
+  display: inline-block;
+  will-change: transform;
+  transition: transform var(--transition-end);
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    ${NavLink}:hover & {
+      transition: var(--transition-start);
+      transform: translateY(-100%);
+    }
+  }
+`;
+
+const AnimationText = styled(MainText)`
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  top: 100%;
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    &::before {
+      content: "";
+      position: absolute;
+      display: inline-block;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      width: 100%;
+      background-color: black;
+      transform: translateX(100%);
+
+      transition: transform var(--transition-start);
+      transition-delay: var(--transition-start);
+      ${NavLink}:hover & {
+        transform: translateX(0);
+      }
+    }
+  }
+`;
+
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
 
@@ -40,12 +107,12 @@ const Header = () => {
           </TransparentButton>
         </MobileButtonsWrapper>
         <Nav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
-          <NavLink href="/collections">Collections</NavLink>
+          <AnimatedNavLink href="/sale">Saldsae</AnimatedNavLink>
+          <AnimatedNavLink href="/new">New&nbsp;Releasesdas</AnimatedNavLink>
+          <AnimatedNavLink href="/men">Mendsa</AnimatedNavLink>
+          <AnimatedNavLink href="/women">Womensadsa</AnimatedNavLink>
+          <AnimatedNavLink href="/kids">Kidsasddas</AnimatedNavLink>
+          <AnimatedNavLink href="/collections">Collectionsads</AnimatedNavLink>
         </Nav>
         <Side />
       </MainHeader>
@@ -78,9 +145,9 @@ const MainHeader = styled.div`
   display: flex;
   align-items: baseline;
   padding: 18px 32px;
-  height: 72px;
-  border-bottom: 1px solid ${COLORS.gray[300]};
 
+  border-bottom: 1px solid ${COLORS.gray[300]};
+  overflow: auto;
   @media ${({ theme }) => theme.QUERIES.tabletAndSmaller} {
     align-items: center;
     border-top: 4px solid ${COLORS.gray[900]};
@@ -105,18 +172,6 @@ const Side = styled.div`
   flex: 1;
   @media ${({ theme }) => theme.QUERIES.tabletAndSmaller} {
     flex: 0;
-  }
-`;
-
-export const NavLink = styled.a`
-  font-size: 1.125rem;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: ${COLORS.gray[900]};
-  font-weight: ${WEIGHTS.medium};
-
-  &:first-of-type {
-    color: ${COLORS.secondary};
   }
 `;
 
