@@ -133,6 +133,8 @@ const Content = styled(DialogContent)`
   padding: 32px;
   min-width: min(300px, 100%);
 
-  animation: ${slideIn} var(--animation-time) both ease-out;
-  animation-delay: var(--animation-time);
+  @media (prefers-reduced-motion: no-preference) {
+    animation: ${slideIn} var(--animation-time) both ease-out;
+    animation-delay: var(--animation-time);
+  }
 `;
